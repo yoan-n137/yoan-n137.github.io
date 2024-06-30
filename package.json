@@ -2,7 +2,7 @@
   "name": "my-react-app",
   "version": "1.0.0",
   "main": "index.js",
-  "homepage": "https://Orisnow.github.io/questions",
+  "homepage": "https://Orisnow.github.io/master",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --mode development --open",
