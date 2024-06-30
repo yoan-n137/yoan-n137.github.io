@@ -17,7 +17,7 @@ function SurveyComponent() {
 const SurveyComponent = () => {
   const onComplete = (survey) => {
     const data = survey.data;
-
+    console.log("Survey results: ", result.data);
     // 将数据保存到Firestore
     db.collection('surveyResults')
       .add(data)
