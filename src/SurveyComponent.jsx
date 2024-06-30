@@ -33,4 +33,8 @@ const SurveyComponent = () => {
 };
 
 
+<<<<<<< HEAD
 export default SurveyComponent;
+=======
+export default SurveyComponent;
+>>>>>>> 855c7ac0c5ef4af2f9dc54546bfd479c024b8569
