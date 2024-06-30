@@ -2,10 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>React App</title>
+  <title>SurveyJS with Firebase</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+  <script src="https://surveyjs.azureedge.net/1.9.86/survey.react.min.js"></script>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="surveyContainer"></div>
+  <script>
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAYfYVdXUq65P0lI-G4HgT93qKXkco3fmM",
+  authDomain: "question-aec13.firebaseapp.com",
+  projectId: "question-aec13",
+  storageBucket: "question-aec13.appspot.com",
+  messagingSenderId: "768713427658",
+  appId: "1:768713427658:web:bbc9eaad5e53810dd24233",
+  measurementId: "G-ZX74L33TZ5"
+};
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // SurveyJS configuration
+    const surveyJSON = {
+      title: "Customer Satisfaction Survey",
+      pages: [
+        {
+          name: "page1",
+          elements: [
+            {
+              type: "radiogroup",
+              name: "satisfaction",
+              title: "How satisfied are you with our product?",
+              choices: [
+                "Very Satisfied",
+                "Satisfied",
+                "Neutral",
+                "Unsatisfied",
+                "Very Unsatisfied"
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    const survey = new Survey.Model(surveyJSON);
+    survey.onComplete.add((result) => {
+      // Send survey data to Firebase
+      db.collection("surveyResults").add(result.data)
+        .then(() => {
+          console.log("Document successfully written!");
+        })
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    });
+
+    ReactDOM.render(<Survey.Survey model={survey} />, document.getElementById("surveyContainer"));
+  </script>
 </body>
 </html>
