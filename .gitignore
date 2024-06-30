@@ -1,0 +1,60 @@
+# 忽略操作系统文件
+*.DS_Store
+Thumbs.db
+
+# 忽略 node_modules 目录
+node_modules/
+
+# 忽略构建输出
+dist/
+
+# 忽略日志文件
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# 忽略临时文件
+*.swp
+*.swo
+*.tmp
+
+# 忽略 IDE 和编辑器的配置文件
+.vscode/
+.idea/
+
+# 忽略 Windows 系统文件
+AppData/
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+*.old
+*.orig
+*.save
+*.gz
+*.tgz
+*.zip
+*.rar
+*.tar
+*.7z
+*.dmg
+*.iso
+*.vdi
+*.vmdk
+*.vmem
+*.vmsn
+*.vmss
+*.nvram
+*.vmxf
+*.vbox
+*.vbox-prev
+*.vdi
+*.vhd
+*.vhdx
+*.vmdk
+*.vmem
+*.vmsn
+*.vmss
+*.nvram
+*.vmxf
