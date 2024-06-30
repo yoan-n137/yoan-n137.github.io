@@ -4,6 +4,7 @@ import { Survey } from "survey-react-ui";
 import "survey-core/defaultV2.min.css";
 import "./index.css";
 import { json } from "./json";
+import { db } from './firebase'; // 导入Firebase配置
 
 function SurveyComponent() {
     const survey = new Model(json);
@@ -13,21 +14,23 @@ function SurveyComponent() {
     return (<Survey model={survey} />);
 }
 
-survey.onComplete.add(result => {
-  fetch('http://localhost:8080/api/survey-results', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(result.data)
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-});
+const SurveyComponent = () => {
+  const onComplete = (survey) => {
+    const data = survey.data;
+
+    // 将数据保存到Firestore
+    db.collection('surveyResults')
+      .add(data)
+      .then(() => {
+        console.log('Document successfully written!');
+      })
+      .catch((error) => {
+        console.error('Error writing document: ', error);
+      });
+  };
+
+  return <Survey json={surveyJSON} onComplete={onComplete} />;
+};
+
 
 export default SurveyComponent;
